@@ -1,27 +1,38 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Router from 'vue-router'
 
-Vue.use(VueRouter);
+import Home from '@views/Home.vue'
+import Login from '@views/Login.vue'
+import Register from '@views/Register.vue'
+import EmailConfirm from '@views/EmailConfirm.vue'
+import ResetPassword from '@views/ResetPassword.vue'
+import ForgotPassword from '@views/ForgotPassword.vue'
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home,
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-];
-
-const router = new VueRouter({
-  routes,
-});
-
-export default router;
+export default new Router({
+  mode: 'history',
+  routes: [
+    {
+      path: '/auth/login',
+      component: Login,
+    },
+    {
+      path: '/auth/register',
+      component: Register,
+    },
+    {
+      path: '/',
+      component: Home,
+    },
+    {
+      path: '/auth/passwords/email',
+      component: ForgotPassword,
+    },
+    {
+      path: '/auth/passwords/reset/:token',
+      component: ResetPassword,
+    },
+    {
+      path: '/auth/emails/confirm/:token',
+      component: EmailConfirm,
+    },
+  ],
+})
